@@ -1,0 +1,71 @@
+{
+  "cities": [
+    {
+      "display_name": "Tel Aviv",
+      "code": "tel aviv",
+      "time_zone": "Israel",
+      "is_default": true
+    },
+    {
+      "display_name": "Jerusalem",
+      "code": "jerusalem",
+      "time_zone": "Israel",
+      "is_default": false
+    },
+    {
+      "display_name": "London",
+      "code": "london",
+      "time_zone": "Europe/London",
+      "is_default": false
+    },
+    {
+      "display_name": "New York",
+      "code": "new york",
+      "time_zone": "US/Central",
+      "is_default": false
+    },
+    {
+      "display_name": "Tokyo",
+      "code": "tokyo",
+      "time_zone": "US/Central",
+      "is_default": false
+    }
+  ],
+  "temperature_scale_units": [
+    {
+      "display": "Celsius",
+      "temp_scale_code": "metric"
+    },
+    {
+      "display": "Fahrenheit",
+      "temp_scale_code": "imperial"
+    },
+    {
+      "display": "Kelvin",
+      "temp_scale_code": "standard"
+    }
+  ],
+  "users": [
+    {
+      "display_name": "Harel",
+      "user_id": 1,
+      "default_city_code": "tel aviv",
+      "default_city_index": 0,
+      "temp_scale_code": "metric"
+    },
+    {
+      "display_name": "Erez",
+      "user_id": 2,
+      "default_city_code": "jerusalem",
+       "default_city_index": 1,
+      "temp_scale_code": "imperial"
+    },
+    {
+      "display_name": "David",
+      "user_id": 3,
+      "default_city_code": "london",
+      "default_city_index": 2,
+      "temp_scale_code": "standard"
+    }
+  ]
+}
