@@ -1,4 +1,5 @@
 import streamlit as st
+
 from functions import (get_db_list, update_users_temperature_scale_units,
                        update_users_cities, get_city_weather, get_city_data_html, get_user_data_html,
                        scale_symbols, get_weather_description_html, epoch_to_human_readable_date)
@@ -11,7 +12,7 @@ st.set_page_config(
 err_code, users = get_db_list('users')
 err_code, cities = get_db_list('cities')
 err_code, temperature_scale_units = get_db_list('temperature_scale_units')
-
+# err_code =  For future use
 users = update_users_cities(users, cities)
 users = update_users_temperature_scale_units(users, temperature_scale_units)
 cities_list = {city["display_name"]: city for city in cities}
@@ -27,14 +28,14 @@ st.caption(
         'This application demonstrates, as a project on the DC course, the implementation \
         of Python functionality with the help of a weather display application, and user preferences.')
 temp_scale_code = 'metric'
-scale_symbol , wind_speed = scale_symbols(temp_scale_code)
+scale_symbol, wind_speed = scale_symbols(temp_scale_code)
 
 col1, col2 = st.columns(2)
 with (col1):
     selected_user = st.selectbox(label="", label_visibility='collapsed', options=users_keys, index=None,
                                  placeholder="select a user")
 
-    if  selected_user:
+    if selected_user:
         user = users_list[selected_user]
         scale_symbol, wind_speed = scale_symbols(user["temp_scale_code"])
         st.markdown(get_user_data_html(user),
@@ -52,20 +53,19 @@ with (col2):
     city = cities_list[selected_city]
     st.markdown(get_city_data_html(city), unsafe_allow_html=True)
     err_code, weather_data = get_city_weather(selected_city, temp_scale_code)
-    #st.caption(weather_data)
+    # st.caption(weather_data)
     if err_code != 0:
         st.warning(weather_data)
 
 if not selected_city:
     st.stop()
-# https://share.streamlit.io/streamlit/emoji-shortcodes
-# https://docs.streamlit.io/library/api-reference/data/st.metric
+
 st.divider()
 st.markdown(get_weather_description_html(weather_data["name"],
-                                         weather_data["weather"][0]["description"] ,
+                                         weather_data["weather"][0]["description"],
                                          str(weather_data["weather"][0]["icon"]))
-    , unsafe_allow_html=True
-)
+            , unsafe_allow_html=True
+            )
 st.divider()
 metrict1 = st.container()
 with metrict1:
@@ -121,8 +121,17 @@ with metrict4:
         st.subheader(sunrise_time_text)
     with col16:
         st.caption('**Sunset time**')
-        sunset_time_text = epoch_to_human_readable_date(weather_data["sys"]["sunset"]) #convert_utc_to_local_time(weather_data["sys"]["sunset"], pytz.timezone("Asia/Jerusalem"))
+        sunset_time_text = epoch_to_human_readable_date(weather_data["sys"][
+                                                            "sunset"])  # convert_utc_to_local_time(weather_data["sys"]["sunset"], pytz.timezone("Asia/Jerusalem"))
         st.subheader(sunset_time_text)
+
+st.divider()
+data: dict[str, list[float]] = {
+    "latitude" : [float(weather_data["coord"]["lat"])],
+    "longitude": [float(weather_data["coord"]["lon"])]
+}
+st.map(data, zoom=10)
+st.divider()
 st.header("Data Tables", divider=True)
 metrict5 = st.container()
 with metrict5:
@@ -150,12 +159,3 @@ with metrict5:
                                    time_zone=st.column_config.TextColumn("Time Zone"),
                                    is_default=st.column_config.TextColumn("Is Default")),
         )
-
-st.divider()
-data: dict[str, list[float]] = {
-    "latitude" : [float(weather_data["coord"]["lat"])],
-    "longitude": [float(weather_data["coord"]["lon"])]
-}
-st.map(data, zoom=10)
-
-
