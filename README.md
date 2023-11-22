@@ -5,7 +5,7 @@ A weather app displays weather in different cities around the world according to
 
 In addition, three users are registered in the app, each with the following settings:
 
-  * Display preferences for a selected city
+  * Default city
   * Different measurement units (metric, imperial, and Kelvin) for displaying city data
 
 When entering the app, the data for the default city is displayed, as well as the **Temp. Scale units** - Celsius.
