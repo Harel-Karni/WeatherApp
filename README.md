@@ -12,6 +12,8 @@ When entering the app, the data for the default city is displayed, as well as th
 
 When selecting a user from the list - the selected city will change according to the user's preferences. The scale units will be displayed in the user's **Temp. Scale units**.
 
+In Cוurren time, as show, there is a difference between the displayed time and the real time due to gaps in updating the database in the API.
+
 You can experience the use of the application in the following link: https://harelweatherapp.streamlit.app/ (Please wait patiently until it goes live)
 
 
